@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BJR | Bonjour</title>
+  
+  <!-- Добавили шрифт 'La Belle Aurore' для рукописного акцента -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- НОВОЕ: Фоновые живые пятна -->
+  <div class="ambient-light">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+  
+  <header>
+    <div class="logo">BJR</div>
+    <nav>
+      <a href="#" class="nav-link">SHOP</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>BJR</h1>
+        <!-- Изменили класс для нового шрифта -->
+        <p class="bonjour-script">Bonjour</p>
+        
+        <div class="desc-wrapper">
+          <p class="desc main-desc">
+            Скоро здесь будет миссия бренда,<br />
+            а пока что — искусство в простоте.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- НОВОЕ: Бегущая строка для динамики -->
+    <div class="marquee-container">
+      <div class="marquee-content">
+        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
+        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
+        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
+        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
+      </div>
+    </div>
+
+    <section class="showcase">
+      <!-- Mystery Item Left -->
+      <div class="product-card mystery">
+        <div class="image-container">
+          <img src="blurPhoto.png" alt="Coming Soon" />
+          <div class="overlay">COMING SOON</div>
+        </div>
+        <div class="product-info">
+          <p class="name">Secret Drop #1</p>
+          <p class="price">$$$</p>
+        </div>
+      </div>
+
+      <!-- Main Item -->
+      <div class="product-card main-product">
+        <div class="image-container">
+          <img src="TshirtOnWhiteBackg.png" alt="BJR T-shirt Fairy Tale" />
+        </div>
+        <div class="product-info">
+          <p class="name">BJR "Fairy Tale"</p>
+          <p class="price">2 600 RUB</p>
+          <button class="btn-buy">ADD TO CART</button>
+        </div>
+      </div>
+
+      <!-- Mystery Item Right -->
+      <div class="product-card mystery">
+        <div class="image-container">
+          <img src="blurPhoto.png" alt="Coming Soon" />
+          <div class="overlay">COMING SOON</div>
+        </div>
+        <div class="product-info">
+          <p class="name">Secret Drop #2</p>
+          <p class="price">$$$</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-note">
+      <p class="coming">Это только начало</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Telegram</a>
+    </div>
+    <p class="copyright">BJR © 2026</p>
+  </footer>
+
+</body>
+</html>

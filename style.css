@@ -1,0 +1,371 @@
+:root {
+  --bg-color: #FDFBF8; /* Очень теплый, почти белый оттенок бумаги */
+  --text-main: #1A1A1A;
+  --text-secondary: #757575;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-script: 'La Belle Aurore', cursive; /* Новый шрифт */
+  --transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* --- НОВОЕ: Ambient Light (Фоновые пятна) --- */
+.ambient-light {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Убираем на задний план */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px); /* Сильное размытие */
+  opacity: 0.6;
+  animation: floatOrb 10s infinite alternate ease-in-out;
+}
+
+/* Пятно 1: Нежный персиково-бежевый */
+.orb-1 {
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(240, 218, 205, 0.4) 0%, rgba(255,255,255,0) 70%);
+  top: -10%;
+  left: -10%;
+}
+
+/* Пятно 2: Холодный серо-голубой (для контраста) */
+.orb-2 {
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(209, 226, 235, 0.4) 0%, rgba(255,255,255,0) 70%);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+/* --- Header --- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 5%;
+  z-index: 100;
+  /* Убрали mix-blend-mode, сделали просто чистым */
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: var(--text-main);
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text-main);
+  transition: var(--transition);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* --- Hero Section --- */
+.hero {
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: fadeUp 1.2s ease forwards;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(60px, 12vw, 140px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: #111;
+  margin-bottom: 0px;
+}
+
+/* Новый стиль для Bonjour */
+.bonjour-script {
+  font-family: var(--font-script);
+  font-size: 32px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  transform: rotate(-5deg) translateX(10px); /* Легкий наклон */
+  display: inline-block;
+}
+
+.desc-wrapper {
+  position: relative;
+}
+
+.desc-wrapper::before {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--text-main), transparent);
+  margin: 0 auto 20px;
+  opacity: 0.2;
+}
+
+.main-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* --- НОВОЕ: Marquee (Бегущая строка) --- */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  background: transparent;
+  border-top: 1px solid rgba(0,0,0,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  margin-bottom: 80px;
+}
+
+.marquee-content {
+  display: flex;
+  white-space: nowrap;
+  animation: scrollText 20s linear infinite;
+}
+
+.marquee-content span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #999;
+  padding-right: 50px;
+}
+
+@keyframes scrollText {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+
+/* --- Showcase Grid --- */
+.showcase {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  align-items: center;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  animation: slowReveal 1s ease forwards;
+}
+
+.product-card:nth-child(1) { animation-delay: 0.2s; }
+.product-card:nth-child(2) { animation-delay: 0s; }
+.product-card:nth-child(3) { animation-delay: 0.4s; }
+
+.image-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  /* Добавляем легкую тень для объема */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+  transition: var(--transition);
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 1s ease;
+}
+
+/* Стили для "загадочных" товаров */
+.mystery .image-container {
+  opacity: 0.7;
+  filter: grayscale(100%) contrast(90%);
+}
+
+.mystery .overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #fff;
+  background: #000;
+  padding: 8px 14px;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.mystery:hover .overlay {
+  opacity: 1;
+}
+
+/* Стили для главного товара */
+.main-product .image-container:hover img {
+  transform: scale(1.03);
+}
+
+.product-info .name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+.product-info .price {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.btn-buy {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.2);
+  color: var(--text-main);
+  padding: 14px 45px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+}
+
+.btn-buy:hover {
+  background: var(--text-main);
+  color: #fff;
+  border-color: var(--text-main);
+}
+
+/* --- Footer & Note --- */
+.footer-note {
+  margin-top: 120px;
+  text-align: center;
+}
+
+.coming {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--text-secondary);
+}
+
+footer {
+  margin-top: 80px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 11px;
+  margin: 0 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.copyright {
+  font-size: 10px;
+  color: #aaa;
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slowReveal {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 80px;
+  }
+  
+  .showcase {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .main-product {
+    order: -1;
+  }
+  
+  /* На мобильных пятна чуть меньше */
+  .orb-1 { width: 90vw; height: 90vw; opacity: 0.5; }
+  .orb-2 { width: 80vw; height: 80vw; opacity: 0.5; }
+}
