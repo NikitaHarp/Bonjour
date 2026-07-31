@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BJR | Fairy Tale T-Shirt</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=La+Belle+Aurore&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
+  <script>
+  if (localStorage.getItem('bjr_theme') === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  }
+  </script>
+</head>
+<body>
+  
+  <header>
+  <div class="block-logo">
+    <div class="logo">BJR</div>
+    <nav>
+      <a href="index.html" class="nav-link">| SHOP</a>
+    </nav>
+  </div>
+  
+  <div class="header-line-box">
+    <img src="logo-bonjour.png" alt="BJR" class="header-line-tag">
+  </div>
+
+  <div class="header-right-actions">
+    <!-- Кнопка смены темы (цвет строго под полосу) -->
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+      <svg class="theme-icon icon-moon" viewBox="0 0 24 24" width="18" height="18">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg class="theme-icon icon-sun" viewBox="0 0 24 24" width="18" height="18">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+
+    <div class="cart-block" id="cartOpenBtn">Cart</div>
+  </div>
+  </header>
+
+  <main class="block-flex">
+    <div class="img-block">
+      <img src="IMG_2354.png" alt="BJR Fairy Tale Front">
+      <img src="IMG_2375.png" alt="BJR Fairy Tale Back">
+      <img src="IMG_2376.PNG" alt="BJR Fairy Tale Detail">
+    </div>
+
+    <div class="info-card">
+      <span class="product-collection">BJR / COLLECTION 2026</span>
+      <h1 class="product-title">BJR "Fairy Tale"</h1>
+      <p class="product-price">2 600 RUB</p>
+
+      <div class="size-picker-header">
+        <span>Размер: <strong id="selectedSizeText">M</strong></span>
+        <button type="button" class="size-guide-btn">Таблица размеров</button>
+      </div>
+      
+      <!-- Кнопки размеров без XL -->
+      <div class="block-size-pick">
+        <button type="button" class="size-btn" data-size="S">S</button>
+        <button type="button" class="size-btn active" data-size="M">M</button>
+        <button type="button" class="size-btn" data-size="L">L</button>
+      </div>
+
+      <!-- Динамическая кнопка: ADD TO CART или PRE-ORDER -->
+      <button type="button" class="btn-buy add-to-cart-main" id="addToCartProdBtn">
+        ADD TO CART
+      </button>
+
+      <div class="product-description">
+        <div class="desc-item">
+          <h4>Описание</h4>
+          <p>Футболка свободного кроя из плотного премиального хлопка с минималистичной вышивкой BJR.</p>
+        </div>
+        <div class="desc-item">
+          <h4>Состав и Уход</h4>
+          <ul>
+            <li>100% Хлопок (240 g/m²)</li>
+            <li>Деликатная стирка 30°C</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span class="footer-line-tag">• BJR STUDIO •</span>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/bjr.made?igsh=MXV2bzJndng3eTZvcg%3D%3D&utm_source=qr">Instagram</a>
+      <a href="https://t.me/BJRmade">Telegram</a>
+    </div>
+    <p class="copyright">Bonjour © 2026</p>
+  </footer>
+
+  <!-- МОДАЛЬНОЕ ОКНО КОРЗИНЫ -->
+  <div class="cart-modal" id="cartModal" aria-hidden="true">
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h2>КОРЗИНА <span id="modalCartCount"></span></h2>
+        <button type="button" class="cart-close" id="cartClose" aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="cart-body" id="cartBody"></div>
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>ИТОГО:</span>
+          <span id="modalCartTotal">0 RUB</span>
+        </div>
+        <p class="cart-note">Доставка и налоги рассчитываются при оформлении.</p>
+        <button type="button" class="btn-buy" style="width: 100%;">ОФОРМИТЬ ЗАКАЗ</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <div id="toastContainer" class="toast-container"></div>
+</body>
+</html>

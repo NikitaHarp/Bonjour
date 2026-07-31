@@ -5,104 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BJR | Bonjour</title>
   
-  <!-- Добавили шрифт 'La Belle Aurore' для рукописного акцента -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=La+Belle+Aurore&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="style.css" />
+  <script>
+  if (localStorage.getItem('bjr_theme') === 'dark') {
+    document.documentElement.classList.add('dark-theme');
+  }
+  </script>
 </head>
 <body>
-
-  <!-- НОВОЕ: Фоновые живые пятна -->
-  <div class="ambient-light">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-  </div>
   
   <header>
+  <div class="block-logo">
     <div class="logo">BJR</div>
     <nav>
-      <a href="#" class="nav-link">SHOP</a>
+      <a href="index.html" class="nav-link">| SHOP</a>
     </nav>
+  </div>
+  
+  <div class="header-line-box">
+    <img src="logo-bonjour.png" alt="BJR" class="header-line-tag">
+  </div>
+
+  <div class="header-right-actions">
+    <!-- Кнопка смены темы (цвет строго под полосу) -->
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+      <svg class="theme-icon icon-moon" viewBox="0 0 24 24" width="18" height="18">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg class="theme-icon icon-sun" viewBox="0 0 24 24" width="18" height="18">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+
+    <div class="cart-block" id="cartOpenBtn">Cart</div>
+  </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-content">
-        <h1>BJR</h1>
-        <!-- Изменили класс для нового шрифта -->
-        <p class="bonjour-script">Bonjour</p>
-        
-        <div class="desc-wrapper">
-          <p class="desc main-desc">
-            Скоро здесь будет миссия бренда,<br />
-            а пока что — искусство в простоте.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- НОВОЕ: Бегущая строка для динамики -->
-    <div class="marquee-container">
-      <div class="marquee-content">
-        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
-        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
-        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
-        <span>EST. 2026 — ART OF SIMPLICITY — BJR — BONJOUR — </span>
-      </div>
+    <div class="main-photo">
+      <!-- <img src="Mainphoto_site.png" alt="BJR" srcset=""> -->
     </div>
-
+    
     <section class="showcase">
-      <!-- Mystery Item Left -->
-      <div class="product-card mystery">
+      <div class="product-card">
         <div class="image-container">
-          <img src="blurPhoto.png" alt="Coming Soon" />
-          <div class="overlay">COMING SOON</div>
-        </div>
-        <div class="product-info">
-          <p class="name">Secret Drop #1</p>
-          <p class="price">$$$</p>
-        </div>
-      </div>
-
-      <!-- Main Item -->
-      <div class="product-card main-product">
-        <div class="image-container">
+          <a href="prodpage.html" class="product-link">
+            <img src="Tshirt-test.png" alt="BJR T-shirt Fairy Tale" />
+          </a>
           
+          <!-- Выбираемые размеры при наведении (без XL) -->
+          <div class="size-hover-overlay">
+            <span class="size-hover-title">ВЫБРАТЬ РАЗМЕР:</span>
+            <div class="size-hover-btns">
+              <a href="prodpage.html?size=S" class="size-hover-btn">S</a>
+              <a href="prodpage.html?size=M" class="size-hover-btn">M</a>
+              <a href="prodpage.html?size=L" class="size-hover-btn">L</a>
+            </div>
+          </div>
         </div>
+        
         <div class="product-info">
-          <p class="name">BJR "Fairy Tale"</p>
+          <a href="prodpage.html" class="product-link">
+            <p class="name">BJR "Fairy Tale"</p>
+          </a>
           <p class="price">2 600 RUB</p>
-          <button class="btn-buy">ADD TO CART</button>
         </div>
       </div>
-
-      <!-- Mystery Item Right -->
-      <div class="product-card mystery">
-        <div class="image-container">
-          <img src="blurPhoto.png" alt="Coming Soon" />
-          <div class="overlay">COMING SOON</div>
-        </div>
-        <div class="product-info">
-          <p class="name">Secret Drop #2</p>
-          <p class="price">$$$</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="footer-note">
-      <p class="coming">Это только начало</p>
     </section>
   </main>
 
   <footer>
+    <span class="footer-line-tag">• BJR STUDIO •</span>
     <div class="footer-links">
-      <a href="#">Instagram</a>
-      <a href="#">Telegram</a>
+      <a href="https://www.instagram.com/bjr.made?igsh=MXV2bzJndng3eTZvcg%3D%3D&utm_source=qr">Instagram</a>
+      <a href="https://t.me/BJRmade">Telegram</a>
     </div>
-    <p class="copyright">BJR © 2026</p>
+    <p class="copyright">Bonjour © 2026</p>
   </footer>
 
+  <!-- МОДАЛЬНОЕ ОКНО КОРЗИНЫ -->
+  <div class="cart-modal" id="cartModal" aria-hidden="true">
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h2>КОРЗИНА <span id="modalCartCount"></span></h2>
+        <button type="button" class="cart-close" id="cartClose" aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="cart-body" id="cartBody"></div>
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>ИТОГО:</span>
+          <span id="modalCartTotal">0 RUB</span>
+        </div>
+        <p class="cart-note">Доставка и налоги рассчитываются при оформлении.</p>
+        <button type="button" class="btn-buy" style="width: 100%;">ОФОРМИТЬ ЗАКАЗ</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <div id="toastContainer" class="toast-container"></div>
 </body>
 </html>
