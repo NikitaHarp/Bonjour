@@ -690,6 +690,13 @@ main {
   border-color: var(--text-main);
 }
 
+.qty-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: transparent !important;
+  color: var(--text-main) !important;
+}
+
 .cart-item-remove {
   background: none;
   border: none;
@@ -729,6 +736,42 @@ main {
   color: var(--text-secondary);
   line-height: 1.4;
 }
+
+/* Поля контактов в корзине */
+.cart-contact-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.cart-contact-inputs input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--btn-border);
+  color: var(--text-main);
+  padding: 12px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.cart-contact-inputs input:focus {
+  border-color: var(--text-main);
+}
+
+/* Стиль для невалидных полей */
+.cart-contact-inputs input.input-error {
+  border-color: #d9534f !important;
+}
+
+.cart-contact-inputs input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
 
 /* ==========================================
    8. УВЕДОМЛЕНИЯ (TOASTS)
@@ -837,6 +880,112 @@ footer::before {
   font-size: 10px;
   color: #aaa;
 }
+
+/* ==========================================
+   11. ТАБЛИЦА РАЗМЕРОВ (MODAL)
+   ========================================== */
+.guide-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1100;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.guide-modal.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.guide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.guide-content {
+  position: relative;
+  background: var(--bg-main);
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.guide-modal.is-open .guide-content {
+  transform: translateY(0);
+}
+
+.guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
+}
+
+.guide-header h3 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.guide-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+.size-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.size-table th, .size-table td {
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  text-align: center;
+}
+
+.size-table th {
+  background: var(--card-bg);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.guide-text-note {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-style: italic;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .guide-content {
+    padding: 30px 20px;
+  }
+}
+
 
 /* ==========================================
    10. МЕДИА-ЗАПРОСЫ (RESPONSIVE BREAKPOINTS)

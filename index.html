@@ -8,7 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=La+Belle+Aurore&display=swap" rel="stylesheet">
-  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
   <link rel="stylesheet" href="style.css" />
   <script>
   if (localStorage.getItem('bjr_theme') === 'dark') {
@@ -95,25 +97,87 @@
     <p class="copyright">Bonjour © 2026</p>
   </footer>
 
-  <!-- МОДАЛЬНОЕ ОКНО КОРЗИНЫ -->
-  <div class="cart-modal" id="cartModal" aria-hidden="true">
-    <div class="cart-overlay" id="cartOverlay"></div>
-    <div class="cart-drawer">
-      <div class="cart-header">
-        <h2>КОРЗИНА <span id="modalCartCount"></span></h2>
-        <button type="button" class="cart-close" id="cartClose" aria-label="Закрыть">&times;</button>
+<!-- ПОЛНЫЙ БЛОК КОРЗИНЫ -->
+<div class="cart-modal" id="cartModal" aria-hidden="true">
+  <div class="cart-overlay" id="cartOverlay"></div>
+  
+  <div class="cart-drawer">
+    <!-- 1. Шапка корзины -->
+    <div class="cart-header">
+      <h2>КОРЗИНА <span id="modalCartCount"></span></h2>
+      <button type="button" class="cart-close" id="cartClose" aria-label="Закрыть">&times;</button>
+    </div>
+
+    <!-- 2. Список товаров (сюда добавляет JS) -->
+    <div class="cart-body" id="cartBody">
+      <!-- Место для товаров -->
+    </div>
+
+    <!-- 3. Футер корзины (Итого + Поля + Кнопка) -->
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>ИТОГО:</span>
+        <span id="modalCartTotal">0 RUB</span>
       </div>
-      <div class="cart-body" id="cartBody"></div>
-      <div class="cart-footer">
-        <div class="cart-total-row">
-          <span>ИТОГО:</span>
-          <span id="modalCartTotal">0 RUB</span>
-        </div>
-        <p class="cart-note">Доставка и налоги рассчитываются при оформлении.</p>
-        <button type="button" class="btn-buy" style="width: 100%;">ОФОРМИТЬ ЗАКАЗ</button>
-      </div>
+      
+      <p class="cart-note">Доставка и налоги рассчитываются при оформлении.</p>
+      
+      <button type="button" class="btn-buy" id="checkoutBtn" style="width: 100%;">
+        ОФОРМИТЬ ЗАКАЗ
+      </button>
     </div>
   </div>
+</div>
+<!-- МОДАЛЬНОЕ ОКНО ПРЕДУПРЕЖДЕНИЯ О ПРЕДЗАКАЗЕ -->
+<div class="guide-modal" id="preOrderWarningModal" aria-hidden="true">
+  <div class="guide-overlay" id="preOrderOverlay"></div>
+  <div class="guide-content">
+    <div class="guide-header">
+      <h3>ВАЖНОЕ УВЕДОМЛЕНИЕ</h3>
+      <button type="button" class="guide-close" id="preOrderClose">&times;</button>
+    </div>
+    <div class="guide-body">
+      <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+        У вас в корзине добавлен <strong>предзаказ</strong>. Это значит, что товар нужно будет подождать примерно 2 недели, но обычно на это уходит неделя.
+      </p>
+      <button type="button" class="btn-buy" id="confirmOrderBtn" style="width: 100%;">Я ПОНИМАЮ, ПРОДОЛЖИТЬ</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО ДАННЫХ ДОСТАВКИ -->
+<div class="guide-modal" id="shippingModal" aria-hidden="true">
+  <div class="guide-overlay" id="shippingOverlay"></div>
+  <div class="guide-content">
+    <div class="guide-header">
+      <h3>ДОСТАВКА СДЭК</h3>
+      <button type="button" class="guide-close" id="shippingClose">&times;</button>
+    </div>
+    <div class="guide-body">
+      <div class="cart-contact-inputs">
+        <!-- Связь -->
+        <p class="field-label">Связь</p>
+        <input type="email" id="cartEmail" placeholder="EMAIL (ОБЯЗАТЕЛЬНО)">
+        <input type="text" id="cartTelegram" placeholder="TELEGRAM (НЕОБЯЗАТЕЛЬНО)">
+        <!-- Группируем поля -->
+        <p class="field-label">Получатель</p>
+        <input type="text" id="shipFio" placeholder="ФАМИЛИЯ ИМЯ ОТЧЕСТВО">
+        <input type="tel" id="shipPhone" placeholder="НОМЕР ТЕЛЕФОНА">
+        
+        <p class="field-label" style="margin-top: 15px;">Куда отправить</p>
+        <input type="text" id="shipCity" placeholder="ГОРОД ДОСТАВКИ">
+        <input type="text" id="shipAddress" placeholder="УЛИЦА И НОМЕР ДОМА (ИЛИ АДРЕС ПВЗ)">
+        
+        <p class="cart-note" style="margin-top: 15px;">
+          * Мы подберем ближайший к указанному адресу пункт выдачи СДЭК.
+        </p>
+      </div>
+      <button type="button" class="btn-buy" id="finalPayBtn" style="width: 100%; margin-top: 25px;">
+        ОФОРМИТЬ И ОПЛАТИТЬ
+      </button>
+    </div>
+  </div>
+</div>
 
   <script src="cart.js"></script>
   <div id="toastContainer" class="toast-container"></div>
